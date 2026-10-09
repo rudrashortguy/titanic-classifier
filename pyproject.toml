@@ -1,0 +1,42 @@
+name = "titanic-classifier"
+description = "End-to-end ML pipeline for predicting Titanic survival"
+readme = "README.md"
+license = "MIT"
+authors = [{name = "Developer"}]
+requires-python = ">=3.8"
+dependencies = [
+    "pandas>=1.3.0",
+    "scikit-learn>=1.0.0",
+    "joblib>=1.0.0",
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.0",
+    "pytest-cov>=2.11.0",
+    "black>=21.5b2",
+    "flake8>=3.9.0",
+]
+
+[project.scripts]
+titanic-classifier = "titanic_classifier.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["titanic_classifier*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov=titanic_classifier --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["titanic_classifier"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+]
